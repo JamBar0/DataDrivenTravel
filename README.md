@@ -53,8 +53,18 @@ Create a Travel-app class and automate testing with data driven from SQL databas
 
 `INSERT INTO Booking (ID, Date, Destination, FlightClass, FlightType, FlightCompany, PassengerType, PassengerID) VALUES('5b65ee2b-6e24-4218-aa00-0b637d782158', '2022-08-30', 'Iceland', 'B', 'R', 'AirIcelandia', 'A', 'c57fe08d-598a-48fa-9d33-e061b2c4445e');`
 
+`INSERT INTO Booking (ID, Date, Destination, FlightClass, FlightType, FlightCompany, PassengerType, PassengerID) VALUES('1b885200-620b-4d29-8664-297bcfc2a756', '2022-09-21', 'Ireland', 'F', 'R', 'AirIreland', 'C', 'f5dc73b9-a10c-4efb-9421-b219f6d44df9');`
+
 `SELECT Booking.Destination, Booking.FlightClass FROM Booking booking, Passenger passenger WHERE passenger.FName = 'FLOZ' AND passenger.ID = booking.PassengerID;`
 
 `SELECT Booking.Destination, Booking.FlightClass FROM Booking booking, Passenger passenger WHERE passenger.LName = 'BonZoop' AND passenger.ID = booking.PassengerID;`
 
 `SELECT Booking.Destination, Booking.FlightClass, Booking.FlightType FROM Booking booking WHERE booking.Date = '2022-08-17'`
+
+`SELECT Booking.FlightCompany, Booking.FlightClass, Booking.FlightType, FROM Booking booking WHERE passenger.LName = 'BonZoop' AND passenger.ID = booking.PassengerID;`
+
+`SELECT *FROM Booking ORDER BY Date ASC;`
+
+`SELECT *FROM Passenger ORDER BY FName ASC;`
+
+`SELECT *FROM Passenger, Booking ORDER BY Date ASC;`
