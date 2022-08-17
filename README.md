@@ -15,34 +15,46 @@ Create a Travel-app class and automate testing with data driven from SQL databas
 
 ## Database Schema
 
-**Animal table**
-- Hunger INT
+**Booking table**
 - ID CHAR(36)
-- Name VARCHAR(100)
-- OwnerID CHAR(36)
-- Species CHAR(1)
+- Date DATE
+- Destination VARCHAR(100)
+- FlightClass CHAR(1)
+- FlightType CHAR(1)
+- FlightCompany VARCHAR(100)
+- PassengerType CHAR(1)
+- PassengerID CHAR(36)
 
-
-**Owner table** 
+**Passenger table** 
 - ID CHAR(36)
-- Name VARCHAR(100)
-- Town VARCHAR(100)
+- FName VARCHAR(100)
+- LName VARCHAR(100)
+- Age INT
 
-**To create the animal table**<br>
-`CREATE TABLE Animal(Hunger INT,ID CHAR(36), Name VARCHAR(100), OwnerID CHAR(36), Species CHAR(1), PRIMARY KEY(ID), FOREIGN KEY(OwnerID) REFERENCES Owner(ID));`
+**Flight table**
+- Date DATE
 
-**To create the owner table**<br>
-`CREATE TABLE Owner(Town VARCHAR(100), ID CHAR(36), Name VARCHAR(100), PRIMARY KEY(ID))`
 
-**To insert a new Owner row**<br>
-`INSERT INTO Owner (ID, Name, Town) VALUES('af3fb932-05cd-41a9-ada1-60b7b7122f26', 'FLOZ', 'Bridgenorth');`
 
-`INSERT INTO Animal (Hunger, ID, Name, OwnerID, Species) VALUES(0, '94fccc18-a20a-4ea1-bc06-67fd463fa835', 'Jess', 'af3fb932-05cd-41a9-ada1-60b7b7122f26', 'C');`
+**To create the Booking table**<br>
+`CREATE TABLE Booking(ID CHAR(36), Date DATE, Destination VARCHAR(100), FlightClass CHAR(1), FlightType CHAR(1),FlightCompany VARCHAR(100), PassengerType CHAR(1), PassengerID CHAR(36), PRIMARY KEY(ID), FOREIGN KEY(PassengerID) REFERENCES Passenger(ID));`
 
-`INSERT INTO Animal (Hunger, ID, Name, OwnerID, Species) VALUES(0, 'f467fbc6-2cc1-4c3d-80ca-f2829944b0f8', 'Milo', 'af3fb932-05cd-41a9-ada1-60b7b7122f26', 'D');`
+**To create the Passenger table**<br>
+`CREATE TABLE Passenger(ID CHAR(36), FName VARCHAR(100), LName VARCHAR(100), Age INT, PRIMARY KEY(ID))`
 
-**To query an animal**<br>
-`SELECT Hunger, ID, Species FROM Animal WHERE Name = 'Jess';`
+**To insert a new Passenger row**<br>
+`INSERT INTO Passenger (ID, FName, LName, Age) VALUES('c57fe08d-598a-48fa-9d33-e061b2c4445e', 'FLOZ', 'FLOZ', 48);`
 
-**To query all pets for an owner**<br>
-`SELECT animal.Name, animal.Species FROM Animal animal, Owner owner WHERE owner.Name = 'FLOZ';`
+`INSERT INTO Passenger (ID, FName, LName, Age) VALUES('f5dc73b9-a10c-4efb-9421-b219f6d44df9', 'Con', 'BonZoop', 6);`
+
+`INSERT INTO Booking (ID, Date, Destination, FlightClass, FlightType, FlightCompany, PassengerType, PassengerID) VALUES('5e4d9031-5bfd-4b55-8424-2c464e36339d', '2022-08-17', 'Spain', 'F', 'S', 'Jet2', 'A', 'c57fe08d-598a-48fa-9d33-e061b2c4445e');`
+
+`INSERT INTO Booking (ID, Date, Destination, FlightClass, FlightType, FlightCompany, PassengerType, PassengerID) VALUES('baf11299-906f-4592-abf4-8edc29b38c5d', '2022-08-17', 'Kuwait', 'E', 'S', 'QatarAir', 'C', 'f5dc73b9-a10c-4efb-9421-b219f6d44df9');`
+
+`INSERT INTO Booking (ID, Date, Destination, FlightClass, FlightType, FlightCompany, PassengerType, PassengerID) VALUES('5b65ee2b-6e24-4218-aa00-0b637d782158', '2022-08-30', 'Iceland', 'B', 'R', 'AirIcelandia', 'A', 'c57fe08d-598a-48fa-9d33-e061b2c4445e');`
+
+`SELECT Booking.Destination, Booking.FlightClass FROM Booking booking, Passenger passenger WHERE passenger.FName = 'FLOZ' AND passenger.ID = booking.PassengerID;`
+
+`SELECT Booking.Destination, Booking.FlightClass FROM Booking booking, Passenger passenger WHERE passenger.LName = 'BonZoop' AND passenger.ID = booking.PassengerID;`
+
+`SELECT Booking.Destination, Booking.FlightClass, Booking.FlightType FROM Booking booking WHERE booking.Date = '2022-08-17'`
